@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.MainActivity"
+    >
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/menu_item_main"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/menu_home"/>
+        <item android:id="@+id/menu_item_describe"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/menu_subscribe"/>
+        <item android:id="@+id/menu_item_star"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/menu_star"/>
+        <item android:id="@+id/menu_item_help"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/menu_help"/>
+        <item android:id="@+id/menu_item_setting"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/menu_setting"/>
+        <item android:id="@+id/menu_item_suggestion"
+            android:icon="@mipmap/ic_launcher"
+            android:title="@string/menu_suggestion"/>
+    </group>
+</menu>
