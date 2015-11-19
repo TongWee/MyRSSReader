@@ -1,4 +1,4 @@
-package com.myrssreader.ui;
+package com.myrssreader.ui.Subscribe;
 
 /**
  * Created by Tong on 2015/11/18.

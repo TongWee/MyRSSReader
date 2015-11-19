@@ -1,5 +1,5 @@
-package com.myrssreader.ui;
-;
+package com.myrssreader.ui.Help;
+
 
 /**
  * Created by Tong on 2015/11/18.

@@ -1,4 +1,4 @@
-package com.myrssreader.ui;
+package com.myrssreader.ui.Main;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -13,11 +13,24 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.myrssreader.R;
+import com.myrssreader.presenter.MainModule;
+import com.myrssreader.presenter.MainPresenter;
+import com.myrssreader.ui.BaseActivity;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView {
+
+    @Inject
+    MainPresenter mMainPresenter;
+
+
     @Bind(R.id.tool_Bar)
     Toolbar _ToolBar;
     @Bind(R.id.main_content)
@@ -39,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 return false;
             }
         });
-        setSupportActionBar(_ToolBar);
 
         ActionBarDrawerToggle adTogger = new ActionBarDrawerToggle(this,
                 _DrawerLayout,_ToolBar,R.string.navigation_drawer_open,
@@ -67,5 +79,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
         else
             finish();
+    }
+    @Override
+    public List<Object> getModules(){
+        return Arrays.<Object>asList(new MainModule(this));
     }
 }
