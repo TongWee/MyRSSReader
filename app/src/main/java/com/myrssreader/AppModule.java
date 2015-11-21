@@ -13,7 +13,8 @@ import dagger.Module;
     },
     injects = {
             RSSReaderApp.class
-    }
+    },
+        library = true
 )
 /*
 * 项目依赖关系图的根节点

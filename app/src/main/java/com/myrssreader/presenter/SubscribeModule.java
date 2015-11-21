@@ -16,7 +16,8 @@ import dagger.Provides;
 
 @Module(
         injects = SubscribeFragment.class,
-        addsTo = AppModule.class
+        addsTo = MainModule.class,
+        library = true
 )
 public class SubscribeModule {
 

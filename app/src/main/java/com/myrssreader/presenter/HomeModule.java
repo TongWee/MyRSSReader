@@ -15,7 +15,8 @@ import dagger.Provides;
 
 @Module(
         injects = HomeFragment.class,
-        addsTo = AppModule.class
+        addsTo = MainModule.class,
+        library = true
 )
 
 

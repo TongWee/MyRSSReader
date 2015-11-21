@@ -11,7 +11,7 @@ import dagger.Provides;
 
 @Module(
         complete = true,
-        library = false
+        library = true
 )
 public class InteractorsModule {
 

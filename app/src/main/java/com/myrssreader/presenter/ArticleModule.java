@@ -16,7 +16,8 @@ import dagger.Provides;
 
 @Module(
         injects = ArticleActivity.class,
-        addsTo = AppModule.class
+        addsTo = AppModule.class,
+        library = true
 )
 public class ArticleModule {
 

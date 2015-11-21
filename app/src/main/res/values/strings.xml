@@ -9,6 +9,12 @@
     <string name="menu_suggestion">建议</string>
 
 
+    <string name="activity_help">帮助</string>
+    <string name="activity_setting">设置</string>
+    <string name="activity_suggestion">建议</string>
+    <string name="activity_article">文章</string>
+    <string name="activity_detail">原文</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 

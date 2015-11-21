@@ -1,7 +1,7 @@
 package com.myrssreader.ui;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 
 import com.myrssreader.RSSReaderApp;
 
@@ -12,7 +12,7 @@ import dagger.ObjectGraph;
 /**
  * Created by Tong on 2015/11/19.
  */
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
 
     private ObjectGraph objectGraph;
 

@@ -2,6 +2,8 @@ package com.myrssreader.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 import com.myrssreader.RSSReaderApp;
 import java.util.List;
 import dagger.ObjectGraph;
@@ -9,7 +11,7 @@ import dagger.ObjectGraph;
 /**
  * Created by Tong on 2015/11/19.
  */
-public abstract class BaseActivity extends Activity{
+public abstract class BaseActivity extends AppCompatActivity {
 
     private ObjectGraph objectGraph;
 
@@ -35,4 +37,15 @@ public abstract class BaseActivity extends Activity{
      * @return Module
      */
     protected abstract List<Object> getModules();
+
+    private long exitTime = 0;
+
+    public void doExit(){
+        if(System.currentTimeMillis() - exitTime > 2000){
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        }
+        else
+            finish();
+    }
 }

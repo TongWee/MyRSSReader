@@ -6,7 +6,6 @@
         android:name=".RSSReaderApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.Main.MainActivity"
             android:label="@string/app_name">
@@ -16,6 +15,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.Article.ArticleActivity"
+            android:label = "@string/activity_article"
+            />
+        <activity
+            android:name=".ui.Suggestion.SuggestionActivity"
+            android:label="@string/activity_suggestion"/>
+
+        <activity
+            android:name=".ui.Detail.DetailActivity"
+            android:label="@string/activity_detail"/>
+
+        <activity
+            android:name=".ui.Help.HelpActivity"
+            android:label="@string/activity_help"
+            />
+        <activity
+            android:name=".ui.Setting.SettingActivity"
+            android:label="@string/activity_setting"
+            />
     </application>
 
 </manifest>

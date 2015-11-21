@@ -8,7 +8,7 @@
         <item android:id="@+id/menu_item_main"
             android:icon="@mipmap/ic_launcher"
             android:title="@string/menu_home"/>
-        <item android:id="@+id/menu_item_describe"
+        <item android:id="@+id/menu_item_subscribe"
             android:icon="@mipmap/ic_launcher"
             android:title="@string/menu_subscribe"/>
         <item android:id="@+id/menu_item_star"
