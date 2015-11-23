@@ -22,9 +22,9 @@ public class FeedRespose {
     public FeedRespose(){
         count = 0;
         loadedCount = 0;
-        title = " ";
-        description = " ";
-        link = " ";
+//        title = " ";
+//        description = " ";
+//        link = " ";
         feedList = new Vector<>(0);
     }
 

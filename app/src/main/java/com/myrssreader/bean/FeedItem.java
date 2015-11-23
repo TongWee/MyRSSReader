@@ -15,13 +15,13 @@ public class FeedItem {
     private boolean isStared;
 
     public FeedItem(){
-        title = " ";
-        category = " ";
-        description = " ";
-        pubDate = " ";
-        link = " ";
-        source = " ";
-        author = " ";
+//        title = " ";
+//        category = " ";
+//        description = " ";
+//        pubDate = " ";
+//        link = " ";
+//        source = " ";
+//        author = " ";
         isLoaded = false;
         isStared = false;
     }

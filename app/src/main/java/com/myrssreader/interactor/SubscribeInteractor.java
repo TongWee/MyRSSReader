@@ -7,5 +7,5 @@ import com.myrssreader.bean.FeedRespose;
  */
 public interface SubscribeInteractor {
     FeedRespose getFeedResponse(String urlString);
-    void getFeedListPage(String urlString, OnGetFeedListCallBack onGetFeedListCallBack);
+    void getFeedListPage(String urlString, int itemCount, OnGetFeedListCallBack onGetFeedListCallBack);
 }
