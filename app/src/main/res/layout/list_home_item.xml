@@ -24,15 +24,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="The most famous book around world"/>
-        <!--<View-->
-            <!--android:layout_marginEnd="5dp"-->
-            <!--android:layout_marginStart="5dp"-->
-            <!--android:id="@+id/list_feed_cutline"-->
-            <!--android:layout_below="@+id/list_feed_title"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="2dp"-->
-            <!--android:background="@color/primary_light"-->
-            <!--/>-->
         <TextView
             android:paddingTop="0dp"
             android:paddingEnd="15dp"

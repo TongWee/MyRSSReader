@@ -2,6 +2,7 @@ package com.myrssreader.ui.Main;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -26,6 +27,7 @@ import com.myrssreader.ui.Setting.SettingActivity;
 import com.myrssreader.ui.Stared.StaredFragment;
 import com.myrssreader.ui.Subscribe.SubscribeFragment;
 import com.myrssreader.ui.Suggestion.SuggestionActivity;
+import com.myrssreader.util.DataBaseHelper;
 import com.myrssreader.util.ResourceHelper;
 
 import java.util.Arrays;
@@ -64,13 +66,9 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         _ToolBar.setTitle(R.string.menu_home);
         setSupportActionBar(_ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        _ToolBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                return false;
-//            }
-//        });
-        //Navigation drawer 开关
+
+        createDatabase(this);
+
         ActionBarDrawerToggle adTogger = new ActionBarDrawerToggle(this,
                 _DrawerLayout,_ToolBar,R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
@@ -149,8 +147,18 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        Log.d("NavigationItemSelected",Integer.toString(menuItem.getItemId()));
+        Log.e("NavigationItemSelected",Integer.toString(menuItem.getItemId()));
         changeFragment(menuItem.getItemId());
         return true;
+    }
+
+    private boolean createDatabase(Context context) {
+        try {
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(context, "Feed.db", null, 1);
+            return true;
+        } catch (Exception ex) {
+            Log.e("ERROR", ex.getStackTrace().toString());
+            return false;
+        }
     }
 }
