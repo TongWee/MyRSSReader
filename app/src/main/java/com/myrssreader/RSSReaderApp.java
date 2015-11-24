@@ -3,6 +3,8 @@ package com.myrssreader;
 import android.app.Application;
 import android.content.Context;
 
+import com.myrssreader.util.DataBaseHelper;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +17,8 @@ public class RSSReaderApp extends Application {
 
     ObjectGraph objectGraph;
 
+    private static DataBaseHelper dataBaseHelper;
+
     private static Context context;
 
     @Override
@@ -24,6 +28,9 @@ public class RSSReaderApp extends Application {
         objectGraph = ObjectGraph.create(getModules().toArray());
 
         objectGraph.inject(this);
+
+
+        dataBaseHelper = new DataBaseHelper(context,"Feed.db",null,2);
 
         super.onCreate();
     }
@@ -51,5 +58,9 @@ public class RSSReaderApp extends Application {
      */
     public ObjectGraph createScopedGraph(Object... modules){
         return objectGraph.plus(modules);
+    }
+
+    public static DataBaseHelper getDataBaseHelper(){
+        return dataBaseHelper;
     }
 }

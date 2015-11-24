@@ -18,11 +18,14 @@ import android.view.MenuItem;
 //import android.widget.Toolbar;
 
 import com.myrssreader.R;
+import com.myrssreader.interactor.OnGetFeedListCallBack;
+import com.myrssreader.interactor.OnGetSubscribeListCallBack;
 import com.myrssreader.presenter.MainModule;
 import com.myrssreader.presenter.MainPresenter;
 import com.myrssreader.ui.BaseActivity;
 import com.myrssreader.ui.Help.HelpActivity;
 import com.myrssreader.ui.Home.HomeFragment;
+import com.myrssreader.ui.OnTurntoSubscribeFragment;
 import com.myrssreader.ui.Setting.SettingActivity;
 import com.myrssreader.ui.Stared.StaredFragment;
 import com.myrssreader.ui.Subscribe.SubscribeFragment;
@@ -38,7 +41,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainView,NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends BaseActivity implements MainView,NavigationView.OnNavigationItemSelectedListener,OnTurntoSubscribeFragment{
 
     @Inject
     MainPresenter mMainPresenter;
@@ -46,8 +49,6 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
     private HomeFragment homeFragment;
     private StaredFragment staredFragment;
     private SubscribeFragment subscribeFragment;
-
-    private static String[] MENU_ITEM = ResourceHelper.getResourceStringArr(R.array.arrays_navigation_item);
 
     @Bind(R.id.tool_Bar)
     Toolbar _ToolBar;
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         setSupportActionBar(_ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        createDatabase(this);
+        mMainPresenter.initSubscribeData(this);
 
         ActionBarDrawerToggle adTogger = new ActionBarDrawerToggle(this,
                 _DrawerLayout,_ToolBar,R.string.navigation_drawer_open,
@@ -87,11 +88,6 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
     }
 
     @Override
-    public void setToolbarTitle(int position) {
-        _ToolBar.setTitle(MENU_ITEM[position]);
-    }
-
-    @Override
     public void onBackPressed() {
         if(_DrawerLayout.isDrawerOpen(Gravity.LEFT))
             _DrawerLayout.closeDrawer(Gravity.LEFT);
@@ -106,8 +102,10 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         boolean isActivity = false;
         switch (rId){
             case R.id.menu_item_main:
-                if(homeFragment == null)
+                if(homeFragment == null) {
                     homeFragment = new HomeFragment();
+                    homeFragment.setOnTurntoSubscribeFragment(this);
+                }
                 fragment = homeFragment;
                 _ToolBar.setTitle(R.string.menu_home);
                 break;
@@ -137,7 +135,6 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
                 break;
             default:
                 return;
-//                break;
         }
         if(!isActivity)
             fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.main_container, fragment).commit();
@@ -152,13 +149,8 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         return true;
     }
 
-    private boolean createDatabase(Context context) {
-        try {
-            DataBaseHelper dataBaseHelper = new DataBaseHelper(context, "Feed.db", null, 1);
-            return true;
-        } catch (Exception ex) {
-            Log.e("ERROR", ex.getStackTrace().toString());
-            return false;
-        }
+    @Override
+    public void onGetLink(String link) {
+
     }
 }

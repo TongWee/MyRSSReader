@@ -22,6 +22,7 @@ import dagger.Provides;
 )
 
 public class MainModule {
+
     private MainView view;
 
     public MainModule(MainView _view){
@@ -36,7 +37,7 @@ public class MainModule {
 
     @Provides
     @Singleton
-    public MainPresenter provideMainPresenter(MainView _view){
-        return new MainPresenterImpl(_view);
+    public MainPresenter provideMainPresenter(MainView _view, MainInteractor _mainInteractor){
+        return new MainPresenterImpl(_view, _mainInteractor);
     }
 }

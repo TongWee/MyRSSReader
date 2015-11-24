@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.myrssreader.R;
 import com.myrssreader.bean.FeedRespose;
@@ -39,10 +38,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
         return mViewHolder;
     }
 
+    public FeedRespose getFeedList(int position){
+        return mData.get(position);
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+
         FeedRespose feedRespose = mData.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
+
         if (feedRespose.getTitle() == null)
             viewHolder._TvMainListTitle.setText("未命名");
         else
@@ -68,9 +73,16 @@ public class HomeAdapter extends RecyclerView.Adapter {
         return mData.size();
     }
 
-    public void addItem(List<FeedRespose> feedRespose) {
+    public void addItems(List<FeedRespose> feedRespose) {
         mData.addAll(getItemCount(), feedRespose);
         notifyDataSetChanged();
+    }
+
+    public void addItem(FeedRespose feedRespose){
+        if(feedRespose!=null) {
+            mData.add(feedRespose);
+            notifyDataSetChanged();
+        }
     }
 
     /**

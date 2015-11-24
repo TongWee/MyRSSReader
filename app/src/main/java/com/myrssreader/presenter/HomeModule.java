@@ -1,6 +1,7 @@
 package com.myrssreader.presenter;
 
 import com.myrssreader.AppModule;
+import com.myrssreader.interactor.HomeInteractor;
 import com.myrssreader.ui.Home.HomeFragment;
 import com.myrssreader.ui.Home.HomeView;
 
@@ -36,8 +37,8 @@ public class HomeModule {
 
     @Provides
     @Singleton
-    public HomePresenter provideHomePresneter(HomeView _homeView){
-        return new HomePresenterImpl(_homeView);
+    public HomePresenter provideHomePresneter(HomeView _homeView, HomeInteractor homeInteractor){
+        return new HomePresenterImpl(_homeView, homeInteractor);
     }
 
 }

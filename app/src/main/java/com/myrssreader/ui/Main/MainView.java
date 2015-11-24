@@ -5,7 +5,5 @@ package com.myrssreader.ui.Main;
  */
 public interface MainView {
 
-    void setToolbarTitle(int position);
-
     void changeFragment(int position);
 }
