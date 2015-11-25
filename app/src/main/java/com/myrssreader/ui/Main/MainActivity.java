@@ -14,7 +14,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.widget.Toast;
 //import android.widget.Toolbar;
 
 import com.myrssreader.R;
@@ -79,7 +81,9 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         _NavigationView.setNavigationItemSelectedListener(this);
 
         homeFragment = new HomeFragment();
-        getFragmentManager().beginTransaction().replace(R.id.main_container,homeFragment).commit();
+        homeFragment.setOnTurntoSubscribeFragment(this);
+        getFragmentManager().beginTransaction().replace(R.id.main_container, homeFragment).commit();
+
     }
 
     @Override
@@ -89,8 +93,11 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
 
     @Override
     public void onBackPressed() {
+        int stackcount = getFragmentManager().getBackStackEntryCount();
         if(_DrawerLayout.isDrawerOpen(Gravity.LEFT))
             _DrawerLayout.closeDrawer(Gravity.LEFT);
+        else if(stackcount>0)
+            getFragmentManager().popBackStack();
         else
             super.doExit();
     }
@@ -100,12 +107,13 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         boolean isActivity = false;
+        boolean isSubscribeFragment = false;
         switch (rId){
             case R.id.menu_item_main:
                 if(homeFragment == null) {
                     homeFragment = new HomeFragment();
-                    homeFragment.setOnTurntoSubscribeFragment(this);
                 }
+                homeFragment.setOnTurntoSubscribeFragment(this);
                 fragment = homeFragment;
                 _ToolBar.setTitle(R.string.menu_home);
                 break;
@@ -113,6 +121,7 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
                 if(subscribeFragment == null)
                     subscribeFragment = new SubscribeFragment();
                 fragment = subscribeFragment;
+                isSubscribeFragment = true;
                 _ToolBar.setTitle(R.string.menu_subscribe);
                 break;
             case R.id.menu_item_star:
@@ -136,21 +145,29 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
             default:
                 return;
         }
-        if(!isActivity)
+        if(!isActivity) {
+            if(isSubscribeFragment)
+                fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).replace(R.id.main_container, fragment).commit();
             fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.main_container, fragment).commit();
+        }
         _DrawerLayout.closeDrawer(Gravity.LEFT);
     }
 
 
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        Log.e("NavigationItemSelected",Integer.toString(menuItem.getItemId()));
         changeFragment(menuItem.getItemId());
         return true;
     }
 
     @Override
     public void onGetLink(String link) {
-
+        Bundle bundle = new Bundle();
+        bundle.putString("Link", link);
+        if(subscribeFragment == null)
+            subscribeFragment = new SubscribeFragment();
+        subscribeFragment.setArguments(bundle);
+        _ToolBar.setTitle("订阅");
+        getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).addToBackStack(null).replace(R.id.main_container, subscribeFragment).commit();
     }
 }

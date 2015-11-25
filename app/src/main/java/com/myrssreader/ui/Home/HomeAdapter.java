@@ -62,7 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.onItemClickListener(view,position);
+                    onItemClickListener.onItemClickListener(view,position,"homeFragment");
                 }
             });
         }

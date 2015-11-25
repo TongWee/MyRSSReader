@@ -7,7 +7,7 @@ import android.view.View;
  */
 public interface SubscribePresenter {
 
-    void firstTimeRefreshHomeItems();
+    void firstTimeRefreshHomeItems(String link);
 
     void refreshHomeItems();
 

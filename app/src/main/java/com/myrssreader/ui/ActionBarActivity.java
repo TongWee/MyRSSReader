@@ -1,4 +1,4 @@
-package com.myrssreader;
+package com.myrssreader.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;

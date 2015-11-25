@@ -2,6 +2,7 @@ package com.myrssreader.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.util.Log;
 
 import com.myrssreader.RSSReaderApp;
 

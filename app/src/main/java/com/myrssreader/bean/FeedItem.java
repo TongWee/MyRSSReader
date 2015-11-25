@@ -1,9 +1,12 @@
 package com.myrssreader.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Tong on 2015/11/18.
  */
-public class FeedItem {
+public class FeedItem implements Parcelable{
     private String title;
     private String category;
     private String description;
@@ -15,13 +18,6 @@ public class FeedItem {
     private boolean isStared;
 
     public FeedItem(){
-//        title = " ";
-//        category = " ";
-//        description = " ";
-//        pubDate = " ";
-//        link = " ";
-//        source = " ";
-//        author = " ";
         isLoaded = false;
         isStared = false;
     }
@@ -98,4 +94,32 @@ public class FeedItem {
         this.title = title;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(title);
+        parcel.writeString(link);
+        parcel.writeString(description);
+    }
+
+    public static final Parcelable.Creator<FeedItem> CREATOR = new Parcelable.Creator<FeedItem>(){
+
+        @Override
+        public FeedItem createFromParcel(Parcel parcel) {
+            FeedItem feedItem = new FeedItem();
+            feedItem.title = parcel.readString();
+            feedItem.link = parcel.readString();
+            feedItem.description = parcel.readString();
+            return feedItem;
+        }
+
+        @Override
+        public FeedItem[] newArray(int i) {
+            return new FeedItem[i];
+        }
+    };
 }

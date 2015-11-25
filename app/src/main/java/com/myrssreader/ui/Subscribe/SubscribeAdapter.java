@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.myrssreader.R;
 import com.myrssreader.bean.FeedItem;
+import com.myrssreader.ui.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<FeedItem> mDataset = new ArrayList<>();
     private Context context;
 
+    private OnItemClickListener onItemClickListener;
     public SubscribeAdapter(Context context) {
         this.context = context;
     }
@@ -36,8 +38,12 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mViewHolder;
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         FeedItem feedItem = mDataset.get(position);
         ViewHolder viewHolder = (ViewHolder)holder;
 
@@ -45,7 +51,15 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             viewHolder._ListFeedDescription.setText(Html.fromHtml(feedItem.getDescription()));
         if(feedItem.getTitle()!=null)
             viewHolder._ListFeedTitle.setText(Html.fromHtml(feedItem.getTitle()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onItemClickListener(view, position, "subScribeFragment");
+            }
+        });
     }
+
+
 
     @Override
     public int getItemCount() {

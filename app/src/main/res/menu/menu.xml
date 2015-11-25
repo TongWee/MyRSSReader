@@ -6,22 +6,22 @@
     >
     <group android:checkableBehavior="single">
         <item android:id="@+id/menu_item_main"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_home"
             android:title="@string/menu_home"/>
         <item android:id="@+id/menu_item_subscribe"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_subscribe"
             android:title="@string/menu_subscribe"/>
         <item android:id="@+id/menu_item_star"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_star"
             android:title="@string/menu_star"/>
         <item android:id="@+id/menu_item_help"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_help"
             android:title="@string/menu_help"/>
         <item android:id="@+id/menu_item_setting"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_settings"
             android:title="@string/menu_setting"/>
         <item android:id="@+id/menu_item_suggestion"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_suggestion"
             android:title="@string/menu_suggestion"/>
     </group>
 </menu>

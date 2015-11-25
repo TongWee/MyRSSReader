@@ -19,7 +19,7 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
 
     private SubscribeView subscribeView;
     private SubscribeInteractor subscribeInteractor;
-
+    private String link = "http://www.liaoxuefeng.com/feed";
     private int mItemPrePage = 0;
     private boolean isLoadingMore = false;
     private boolean isFirstTimeLoad = true;
@@ -42,11 +42,11 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
             subscribeView.hideRefresh();
             isFirstTimeLoad = false;
         }
-        else if(isResfreshing){
-            subscribeView.refreshItems(feedItemList);
-            subscribeView.hideRefresh();
-            isResfreshing = false;
-        }
+//        else if(isResfreshing){
+//            subscribeView.refreshItems(feedItemList);
+//            subscribeView.hideRefresh();
+//            isResfreshing = false;
+//        }
         subscribeView.hideRefresh();
     }
 
@@ -57,9 +57,12 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
 
 
     @Override
-    public void firstTimeRefreshHomeItems() {
+    public void firstTimeRefreshHomeItems(String _link) {
         subscribeView.showRefresh();
-        subscribeInteractor.getFeedListPage("http://www.liaoxuefeng.com/feed", mItemPrePage, this);
+        if(_link!=null)
+            this.link = _link;
+        subscribeInteractor.getFeedListPage(link, mItemPrePage, this);
+
         //isFirstTimeLoad = true;
     }
 
@@ -69,16 +72,16 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
             return;
         isResfreshing = true;
         subscribeView.showRefresh();
-        subscribeInteractor.getFeedListPage("http://www.liaoxuefeng.com/feed", mItemPrePage,this);
+        subscribeInteractor.getFeedListPage(link, mItemPrePage,this);
     }
 
     @Override
     public void loadMoreHomeItems() {
-        if(isLoadingMore)
-            return;
-        isLoadingMore = true;
-        subscribeView.showRefresh();
-        subscribeInteractor.getFeedListPage("http://www.liaoxuefeng.com/feed", mItemPrePage,this);
+//        if(isLoadingMore)
+//            return;
+//        isLoadingMore = true;
+//        subscribeView.showRefresh();
+//        subscribeInteractor.getFeedListPage(link, mItemPrePage,this);
     }
 
     @Override

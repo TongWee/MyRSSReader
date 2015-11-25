@@ -1,12 +1,10 @@
 package com.myrssreader.ui.Help;
 
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.myrssreader.ActionBarActivity;
+import com.myrssreader.ui.ActionBarActivity;
 import com.myrssreader.R;
 
 import butterknife.Bind;
