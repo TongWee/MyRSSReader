@@ -2,7 +2,6 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -19,10 +18,9 @@
         android:id="@+id/home_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="100dp"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_action_add"
-        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_colorNormal="@color/accent"
         fab:fab_colorPressed="@color/divider"
         android:layout_gravity="bottom|end" />
 </android.support.design.widget.CoordinatorLayout>

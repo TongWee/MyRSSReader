@@ -42,6 +42,7 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
     private SubscribeAdapter subscribeAdapter;
     private LinearLayoutManager linearLayoutManager;
     private boolean isFirstLoad = true;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -94,7 +95,7 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
 
     @Override
     public void refreshItems(List<FeedItem> feedItems) {
-        mSubscribePresenter.refreshHomeItems();
+        subscribeAdapter.refreshItems(feedItems);
     }
 
     @Override
@@ -105,7 +106,7 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
 
     @Override
     public void onRefresh() {
-//        mSubscribePresenter.refreshHomeItems();
+        mSubscribePresenter.refreshHomeItems();
     }
 
 

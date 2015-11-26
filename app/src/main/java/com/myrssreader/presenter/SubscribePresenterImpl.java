@@ -32,6 +32,8 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
 
     @Override
     public void onSuccess(List<FeedItem> feedItemList) {
+        if(subscribeView == null)
+            return;
         if(isLoadingMore){
             subscribeView.loadMoreItems(feedItemList);
             subscribeView.hideRefresh();
@@ -42,17 +44,18 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
             subscribeView.hideRefresh();
             isFirstTimeLoad = false;
         }
-//        else if(isResfreshing){
-//            subscribeView.refreshItems(feedItemList);
-//            subscribeView.hideRefresh();
-//            isResfreshing = false;
-//        }
+        else if(isResfreshing){
+            subscribeView.refreshItems(feedItemList);
+            subscribeView.hideRefresh();
+            isFirstTimeLoad = false;
+        }
         subscribeView.hideRefresh();
     }
 
     @Override
     public void onFailure(String ex) {
-        Toast.makeText(RSSReaderApp.getContext(),"Failed",Toast.LENGTH_SHORT).show();
+        Toast.makeText(RSSReaderApp.getContext(),"获取数据失败",Toast.LENGTH_SHORT).show();
+        subscribeView.hideRefresh();
     }
 
 
@@ -62,8 +65,6 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
         if(_link!=null)
             this.link = _link;
         subscribeInteractor.getFeedListPage(link, mItemPrePage, this);
-
-        //isFirstTimeLoad = true;
     }
 
     @Override
@@ -77,6 +78,7 @@ public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListC
 
     @Override
     public void loadMoreHomeItems() {
+        refreshHomeItems();
 //        if(isLoadingMore)
 //            return;
 //        isLoadingMore = true;

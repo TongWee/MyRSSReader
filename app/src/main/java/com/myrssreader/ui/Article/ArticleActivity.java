@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -49,6 +50,8 @@ public class ArticleActivity extends BaseActivity implements ArticleView {
         setSupportActionBar(_ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final Intent intent = new Intent(this, DetailActivity.class);
+
+        _TvArticle.setMovementMethod(new ScrollingMovementMethod());
 
         if (feedItem != null) {
             _TvArticle.setText(feedItem.getTitle());

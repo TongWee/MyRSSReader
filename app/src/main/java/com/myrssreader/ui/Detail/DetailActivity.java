@@ -35,5 +35,4 @@ public class DetailActivity extends ActionBarActivity implements DetailView {
         if (link != null)
             _WvDetail.loadUrl(link);
     }
-
 }

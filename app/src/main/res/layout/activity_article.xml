@@ -2,7 +2,9 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context = ".ui.Article.ArticleActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -29,11 +31,12 @@
         android:layout_height="wrap_content"
      >
     <TextView
+
             android:textSize="18sp"
             android:textColor="@color/primary_text"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:scrollbars="horizontal"
+            android:scrollbars="none"
             android:lineSpacingMultiplier="1.5"
             android:id="@+id/tv_description"
             android:layout_below="@id/tv_article"
