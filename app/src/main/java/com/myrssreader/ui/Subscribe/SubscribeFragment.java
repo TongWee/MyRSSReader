@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.myrssreader.R;
 import com.myrssreader.bean.FeedItem;
@@ -17,10 +16,10 @@ import com.myrssreader.presenter.SubscribePresenter;
 import com.myrssreader.ui.Article.ArticleActivity;
 import com.myrssreader.ui.BaseFragment;
 import com.myrssreader.ui.OnItemClickListener;
+import com.myrssreader.ui.OnTurntoSubscribeFragment;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.zip.Inflater;
 
 import javax.inject.Inject;
 
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Tong on 2015/11/18.
  */
-public class SubscribeFragment extends BaseFragment implements SubscribeView, SwipeRefreshLayout.OnRefreshListener,OnItemClickListener {
+public class SubscribeFragment extends BaseFragment implements SubscribeView, SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
     @Inject
     SubscribePresenter mSubscribePresenter;
@@ -42,13 +41,18 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
     private SubscribeAdapter subscribeAdapter;
     private LinearLayoutManager linearLayoutManager;
     private boolean isFirstLoad = true;
+    private OnTurntoSubscribeFragment onTurntoSubscribeFragment;
+
+    public void setOnBackListener(OnTurntoSubscribeFragment onTurntoSubscribeFragment) {
+        this.onTurntoSubscribeFragment = onTurntoSubscribeFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Bundle bundle = getArguments();
         String link = null;
-        if(bundle!=null){
+        if (bundle != null) {
             link = bundle.getString("Link");
         }
 
@@ -62,7 +66,6 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
         linearLayoutManager = new LinearLayoutManager(getActivity());
         _SubscribeRecyclerView.setLayoutManager(linearLayoutManager);
         _SubscribeRecyclerView.setAdapter(subscribeAdapter);
-
         mSubscribePresenter.firstTimeRefreshHomeItems(link);
 
         return rootView;
@@ -99,6 +102,12 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
     }
 
     @Override
+    public void setBackEnable(boolean isEnable) {
+        if (onTurntoSubscribeFragment != null)
+            onTurntoSubscribeFragment.setBackEnable(isEnable);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
@@ -112,10 +121,11 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
 
     @Override
     public void onItemClickListener(View view, int position, String viewName) {
-        if(viewName == "subScribeFragment"){
+        if (viewName == "subScribeFragment") {
             FeedItem feedItem = subscribeAdapter.getFeedItem(position);
+
             Intent intent = new Intent(getActivity(), ArticleActivity.class);
-            intent.putExtra("feedItem",feedItem);
+            intent.putExtra("feedItem", feedItem);
             startActivity(intent);
         }
     }

@@ -7,11 +7,11 @@ import com.myrssreader.RSSReaderApp;
  */
 public class ResourceHelper {
 
-    public static String getResourceString(int rId){
+    public static String getResourceString(int rId) {
         return RSSReaderApp.getContext().getResources().getString(rId);
     }
 
-    public static String[] getResourceStringArr(int rId){
+    public static String[] getResourceStringArr(int rId) {
         return RSSReaderApp.getContext().getResources().getStringArray(rId);
     }
 

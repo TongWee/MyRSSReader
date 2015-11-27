@@ -1,4 +1,5 @@
 package com.myrssreader.ui.Stared;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,12 +27,12 @@ public class StaredFragment extends BaseFragment implements StaredView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_stared, container,false);
+        View rootView = inflater.inflate(R.layout.fragment_stared, container, false);
         return rootView;
     }
 
     @Override
-    public List<Object> getModules(){
+    public List<Object> getModules() {
         return Arrays.<Object>asList(new StaredModule(this));
     }
 }

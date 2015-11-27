@@ -2,7 +2,6 @@ package com.myrssreader.ui;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.util.Log;
 
 import com.myrssreader.RSSReaderApp;
 
@@ -20,7 +19,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        objectGraph = ((RSSReaderApp)activity.getApplication()).createScopedGraph(getModules().toArray());
+        objectGraph = ((RSSReaderApp) activity.getApplication()).createScopedGraph(getModules().toArray());
         objectGraph.inject(this);
     }
 

@@ -10,7 +10,8 @@ public class ArticlePresenterImpl implements ArticlePresenter {
 
     private ArticleView articleView;
     private ArticleInteractor articleInteractor;
-    public ArticlePresenterImpl(ArticleView _articleView, ArticleInteractor _articleInteractor){
+
+    public ArticlePresenterImpl(ArticleView _articleView, ArticleInteractor _articleInteractor) {
         this.articleView = _articleView;
         this.articleInteractor = _articleInteractor;
     }

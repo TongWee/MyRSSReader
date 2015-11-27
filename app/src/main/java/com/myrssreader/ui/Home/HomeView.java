@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface HomeView {
     void firstLoadSubscribe(List<FeedRespose> feedResposeList);
+
     void addSubscribe(FeedRespose feedRespose);
 }

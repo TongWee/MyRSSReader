@@ -12,7 +12,7 @@ public class StaredPresenterImpl implements StaredPresenter {
 
     private StaredInteractor staredInteractor;
 
-    public StaredPresenterImpl(StaredView _staredView, StaredInteractor _staredInteractor){
+    public StaredPresenterImpl(StaredView _staredView, StaredInteractor _staredInteractor) {
         this.staredView = _staredView;
         this.staredInteractor = _staredInteractor;
     }

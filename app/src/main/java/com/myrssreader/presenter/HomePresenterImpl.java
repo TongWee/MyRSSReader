@@ -13,12 +13,12 @@ import java.util.List;
 /**
  * Created by Tong on 2015/11/18.
  */
-public class HomePresenterImpl implements HomePresenter,OnGetSubscribeListCallBack{
+public class HomePresenterImpl implements HomePresenter, OnGetSubscribeListCallBack {
 
     private HomeView homeView;
     private HomeInteractor homeInteractor;
 
-    public HomePresenterImpl(HomeView _homeView, HomeInteractor _homeInteractor){
+    public HomePresenterImpl(HomeView _homeView, HomeInteractor _homeInteractor) {
         this.homeView = _homeView;
         this.homeInteractor = _homeInteractor;
     }
@@ -45,6 +45,6 @@ public class HomePresenterImpl implements HomePresenter,OnGetSubscribeListCallBa
 
     @Override
     public void onFailure(String errorString) {
-        Toast.makeText(RSSReaderApp.getContext(),errorString,Toast.LENGTH_SHORT).show();
+        Toast.makeText(RSSReaderApp.getContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }

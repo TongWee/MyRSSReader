@@ -17,22 +17,25 @@ import org.xml.sax.XMLReader;
 
 import java.io.StringReader;
 import java.util.List;
+
 import javax.xml.parsers.SAXParserFactory;
 
 /**
  * Created by Tong on 2015/11/18.
  */
 public class SubscribeInteractorImpl implements SubscribeInteractor {
-
+    /**
+     * 获取FeedItem列表
+     * @param urlString URL地址
+     * @param onGetFeedListCallBack 回调函数 获取得到的数据
+     */
     @Override
-    public FeedRespose getFeedResponse(String urlString) {
-        return new FeedRespose();
-    }
-
-    @Override
-    public void getFeedListPage(final String urlString, final int itemCount, final OnGetFeedListCallBack onGetFeedListCallBack) {
+    public void getFeedListPage(final String urlString,final OnGetFeedListCallBack onGetFeedListCallBack) {
         RequestQueue requestQueue = Volley.newRequestQueue(RSSReaderApp.getContext());
-        StringRequest stringRequest = new StringRequest(urlString, new Response.Listener<String>() {
+        String strLink = urlString;
+        if (!urlString.contains("http://"))
+            strLink = "http://" + urlString;
+        StringRequest stringRequest = new StringRequest(strLink, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 FeedRespose feedRespose = parseXMLWithSAX(response);
@@ -52,7 +55,12 @@ public class SubscribeInteractorImpl implements SubscribeInteractor {
         requestQueue.add(stringRequest);
     }
 
-    private FeedRespose parseXMLWithSAX(String xmlData){
+    /**
+     *
+     * @param xmlData String流形式的xml数据
+     * @return feedResponse对象
+     */
+    private FeedRespose parseXMLWithSAX(String xmlData) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             XMLReader xmlReader = factory.newSAXParser().getXMLReader();
@@ -61,8 +69,8 @@ public class SubscribeInteractorImpl implements SubscribeInteractor {
             xmlReader.parse(new InputSource(new StringReader(xmlData)));
             FeedRespose feedRespose = rssHandler.getRespose();
             return feedRespose;
-        }catch (Exception ex){
-            Log.d("XML",ex.getStackTrace().toString());
+        } catch (Exception ex) {
+            Log.d("XML", ex.getStackTrace().toString());
             return null;
         }
     }

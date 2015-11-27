@@ -4,8 +4,8 @@ package com.myrssreader.ui.Suggestion;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.myrssreader.ui.ActionBarActivity;
 import com.myrssreader.R;
+import com.myrssreader.ui.ActionBarActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -27,4 +27,5 @@ public class SuggestionActivity extends ActionBarActivity implements SuggestionV
         setSupportActionBar(_ToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
 }

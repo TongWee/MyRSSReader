@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.myrssreader.RSSReaderApp;
 import com.myrssreader.bean.FeedItem;
-import com.myrssreader.bean.FeedRespose;
 import com.myrssreader.interactor.OnGetFeedListCallBack;
 import com.myrssreader.interactor.SubscribeInteractor;
 import com.myrssreader.ui.Subscribe.SubscribeView;
@@ -15,65 +14,63 @@ import java.util.List;
 /**
  * Created by Tong on 2015/11/18.
  */
-public class SubscribePresenterImpl implements SubscribePresenter,OnGetFeedListCallBack {
+public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedListCallBack {
 
     private SubscribeView subscribeView;
     private SubscribeInteractor subscribeInteractor;
     private String link = "http://www.liaoxuefeng.com/feed";
-    private int mItemPrePage = 0;
     private boolean isLoadingMore = false;
     private boolean isFirstTimeLoad = true;
     private boolean isResfreshing = false;
 
-    public SubscribePresenterImpl (SubscribeView _subscribeView, SubscribeInteractor _subscribeInteractor){
+    public SubscribePresenterImpl(SubscribeView _subscribeView, SubscribeInteractor _subscribeInteractor) {
         this.subscribeView = _subscribeView;
         this.subscribeInteractor = _subscribeInteractor;
     }
 
     @Override
     public void onSuccess(List<FeedItem> feedItemList) {
-        if(subscribeView == null)
-            return;
-        if(isLoadingMore){
+        if (isLoadingMore) {
             subscribeView.loadMoreItems(feedItemList);
             subscribeView.hideRefresh();
             isLoadingMore = false;
-        }
-        else if(isFirstTimeLoad){
+        } else if (isFirstTimeLoad) {
             subscribeView.loadMoreItems(feedItemList);
             subscribeView.hideRefresh();
             isFirstTimeLoad = false;
-        }
-        else if(isResfreshing){
+        } else if (isResfreshing) {
             subscribeView.refreshItems(feedItemList);
             subscribeView.hideRefresh();
             isFirstTimeLoad = false;
         }
+        subscribeView.setBackEnable(true);
         subscribeView.hideRefresh();
     }
 
     @Override
     public void onFailure(String ex) {
-        Toast.makeText(RSSReaderApp.getContext(),"获取数据失败",Toast.LENGTH_SHORT).show();
+        Toast.makeText(RSSReaderApp.getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
         subscribeView.hideRefresh();
     }
 
 
     @Override
     public void firstTimeRefreshHomeItems(String _link) {
+        subscribeView.setBackEnable(false);
         subscribeView.showRefresh();
-        if(_link!=null)
+        if (_link != null)
             this.link = _link;
-        subscribeInteractor.getFeedListPage(link, mItemPrePage, this);
+        subscribeInteractor.getFeedListPage(link,this);
     }
 
     @Override
     public void refreshHomeItems() {
-        if(isResfreshing)
+        subscribeView.setBackEnable(false);
+        if (isResfreshing)
             return;
         isResfreshing = true;
         subscribeView.showRefresh();
-        subscribeInteractor.getFeedListPage(link, mItemPrePage,this);
+        subscribeInteractor.getFeedListPage(link,this);
     }
 
     @Override

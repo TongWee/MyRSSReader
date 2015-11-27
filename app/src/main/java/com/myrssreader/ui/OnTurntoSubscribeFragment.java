@@ -5,4 +5,6 @@ package com.myrssreader.ui;
  */
 public interface OnTurntoSubscribeFragment {
     void onGetLink(String link);
+
+    void setBackEnable(boolean isEnable);
 }

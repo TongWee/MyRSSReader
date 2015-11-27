@@ -9,5 +9,6 @@ import java.util.List;
  */
 public interface OnGetFeedListCallBack {
     void onSuccess(List<FeedItem> feedList);
+
     void onFailure(String ex);
 }

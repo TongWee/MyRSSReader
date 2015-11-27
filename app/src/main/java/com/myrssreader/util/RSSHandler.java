@@ -12,30 +12,23 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class RSSHandler extends DefaultHandler {
 
-    private FeedItem feedItem;
-
-    private FeedRespose feedRespose;
-
-    private String lastElementName = "";
-
-
     private final int RSS_FEED_TITLE = 1;
     private final int RSS_FEED_DESCRIPTION = 4;
     private final int RSS_FEED_LINK = 5;
-
     private final int RSS_TITLE = 6;
     private final int RSS_CATEGORY = 7;
     private final int RSS_PUBDATE = 8;
     private final int RSS_DESCRIPTION = 9;
     private final int RSS_LINK = 10;
-
+    int currentState = 0;
+    private FeedItem feedItem;
+    private FeedRespose feedRespose;
+    private String lastElementName = "";
     private boolean isFeedTitle = true;
     private boolean isFeedDescription = true;
     private boolean isFeedLink = true;
 
-    int currentState = 0;
-
-    public FeedRespose getRespose(){
+    public FeedRespose getRespose() {
         return feedRespose;
     }
 
@@ -43,58 +36,53 @@ public class RSSHandler extends DefaultHandler {
     public void startDocument() throws SAXException {
         feedItem = new FeedItem();
         feedRespose = new FeedRespose();
-//        super.startDocument();
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-//        super.startElement(uri, localName, qName, attributes);
-        if(localName.equals("channel")){
+        if (localName.equals("channel")) {
             currentState = 0;
             return;
         }
 
-        if(localName.equals("item")){
+        if (localName.equals("item")) {
             feedItem = new FeedItem();
             return;
         }
 
-        if(localName.equals("title")){
-            if(isFeedTitle){
+        if (localName.equals("title")) {
+            if (isFeedTitle) {
                 isFeedTitle = false;
                 currentState = RSS_FEED_TITLE;
-            }
-            else
+            } else
                 currentState = RSS_TITLE;
             return;
         }
 
-        if(localName.equals("category")){
+        if (localName.equals("category")) {
             currentState = RSS_CATEGORY;
             return;
         }
 
-        if(localName.equals("link")){
-            if(isFeedLink){
+        if (localName.equals("link")) {
+            if (isFeedLink) {
                 isFeedLink = false;
                 currentState = RSS_FEED_LINK;
-            }
-            else
+            } else
                 currentState = RSS_LINK;
             return;
         }
 
-        if(localName.equals("description")){
-            if(isFeedDescription){
+        if (localName.equals("description")) {
+            if (isFeedDescription) {
                 isFeedDescription = false;
                 currentState = RSS_FEED_DESCRIPTION;
-            }
-            else
+            } else
                 currentState = RSS_DESCRIPTION;
             return;
         }
 
-        if(localName.equals("pubDate")) {
+        if (localName.equals("pubDate")) {
             currentState = RSS_PUBDATE;
             return;
         }
@@ -104,7 +92,7 @@ public class RSSHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String contentString = new String(ch, start, length);
-        switch (currentState){
+        switch (currentState) {
             case RSS_FEED_TITLE:
                 feedRespose.setTitle(contentString);
                 currentState = 0;
@@ -115,7 +103,7 @@ public class RSSHandler extends DefaultHandler {
                 break;
             case RSS_FEED_DESCRIPTION:
                 currentState = 0;
-                feedRespose.setLink(contentString);
+                feedRespose.setDescription(contentString);
                 break;
             case RSS_TITLE:
                 currentState = 0;
@@ -146,8 +134,7 @@ public class RSSHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
 //        super.endElement(uri, localName, qName);
-        if(localName.equals("item"))
-        {
+        if (localName.equals("item")) {
             feedRespose.addFeed(feedItem);
             return;
         }

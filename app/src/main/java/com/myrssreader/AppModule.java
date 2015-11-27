@@ -8,12 +8,12 @@ import dagger.Module;
  * Created by Tong on 2015/11/18.
  */
 @Module(
-    includes = {
-            InteractorsModule.class
-    },
-    injects = {
-            RSSReaderApp.class
-    },
+        includes = {
+                InteractorsModule.class
+        },
+        injects = {
+                RSSReaderApp.class
+        },
         library = true
 )
 /*
@@ -21,5 +21,8 @@ import dagger.Module;
 * */
 public class AppModule {
     private RSSReaderApp app;
-    public AppModule(RSSReaderApp _app){this.app = _app;}
+
+    public AppModule(RSSReaderApp _app) {
+        this.app = _app;
+    }
 }

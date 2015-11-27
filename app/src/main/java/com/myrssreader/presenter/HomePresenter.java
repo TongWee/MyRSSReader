@@ -5,5 +5,6 @@ package com.myrssreader.presenter;
  */
 public interface HomePresenter {
     void addSubscribe(String urlString);
+
     void firstLoadSubscribeList();
 }

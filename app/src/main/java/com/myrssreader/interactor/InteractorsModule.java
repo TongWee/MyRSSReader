@@ -17,21 +17,31 @@ public class InteractorsModule {
 
     @Provides
     @Singleton
-    public ArticleInteractor provideArticleInteractor(){return new ArticleInteractorImpl();}
+    public ArticleInteractor provideArticleInteractor() {
+        return new ArticleInteractorImpl();
+    }
 
     @Provides
     @Singleton
-    public HomeInteractor provideHomeInteractor(){return new HomeInteractorImpl();}
+    public HomeInteractor provideHomeInteractor() {
+        return new HomeInteractorImpl();
+    }
 
     @Provides
     @Singleton
-    public StaredInteractor provideStaredInteractor(){return new StaredInteractorImpl();}
+    public StaredInteractor provideStaredInteractor() {
+        return new StaredInteractorImpl();
+    }
 
     @Provides
     @Singleton
-    public SubscribeInteractor provideSubscribeInteractor(){return new SubscribeInteractorImpl();}
+    public SubscribeInteractor provideSubscribeInteractor() {
+        return new SubscribeInteractorImpl();
+    }
 
     @Provides
     @Singleton
-    public MainInteractor provideMainInteractor(){return new MainInteractorImpl();}
+    public MainInteractor provideMainInteractor() {
+        return new MainInteractorImpl();
+    }
 }

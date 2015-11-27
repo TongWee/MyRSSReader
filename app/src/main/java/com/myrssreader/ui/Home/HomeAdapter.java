@@ -24,12 +24,15 @@ public class HomeAdapter extends RecyclerView.Adapter {
     private List<FeedRespose> mData = new ArrayList<>();
     private Context context;
     private OnItemClickListener onItemClickListener;
+
     public HomeAdapter(Context context) {
         this.context = context;
     }
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ViewHolder mViewHolder;
@@ -38,7 +41,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         return mViewHolder;
     }
 
-    public FeedRespose getFeedList(int position){
+    public FeedRespose getFeedList(int position) {
         return mData.get(position);
     }
 
@@ -58,11 +61,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
         else
             viewHolder._TvMainListDescription.setText(feedRespose.getDescription());
 
-        if(onItemClickListener!=null){
+        if (onItemClickListener != null) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.onItemClickListener(view,position,"homeFragment");
+                    onItemClickListener.onItemClickListener(view, position, "homeFragment");
                 }
             });
         }
@@ -78,8 +81,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void addItem(FeedRespose feedRespose){
-        if(feedRespose!=null) {
+    public void addItem(FeedRespose feedRespose) {
+        if (feedRespose != null) {
             mData.add(feedRespose);
             notifyDataSetChanged();
         }
@@ -91,7 +94,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
      *
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.tv_main_list_title)
         AutofitTextView _TvMainListTitle;
         @Bind(R.id.tv_main_list_description)

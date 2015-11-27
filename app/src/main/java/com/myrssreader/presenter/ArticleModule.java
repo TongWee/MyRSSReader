@@ -29,13 +29,13 @@ public class ArticleModule {
 
     @Provides
     @Singleton
-    public ArticleView provideArticleView(){
+    public ArticleView provideArticleView() {
         return this.articleView;
     }
 
     @Provides
     @Singleton
-    public ArticlePresenter provideArticlePresenter(ArticleView _articleView, ArticleInteractor _articleInteractor){
+    public ArticlePresenter provideArticlePresenter(ArticleView _articleView, ArticleInteractor _articleInteractor) {
         return new ArticlePresenterImpl(_articleView, _articleInteractor);
     }
 }

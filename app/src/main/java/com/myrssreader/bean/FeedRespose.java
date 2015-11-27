@@ -7,8 +7,8 @@ import java.util.Vector;
 
 /**
  * Created by Tong on 2015/11/18.
+ * 经过XML解析得到的Feed对象
  */
-
 
 
 public class FeedRespose {
@@ -19,28 +19,25 @@ public class FeedRespose {
     private String link;
     private List<FeedItem> feedList;
 
-    public FeedRespose(){
+    public FeedRespose() {
         count = 0;
         loadedCount = 0;
-//        title = " ";
-//        description = " ";
-//        link = " ";
         feedList = new Vector<>(0);
     }
 
-    public List<FeedItem> getFeedList(){
+    public List<FeedItem> getFeedList() {
         return feedList;
     }
 
-    public void addFeed(FeedItem item){
+    public void addFeed(FeedItem item) {
         feedList.add(item);
         this.count++;
     }
 
-    public void deleteFeed(FeedItem item){
+    public void deleteFeed(FeedItem item) {
         feedList.remove(item);
-        if(this.count == 0)
-            Log.e("DeleteFeed","FeedItem is Empty.");
+        if (this.count == 0)
+            Log.e("DeleteFeed", "FeedItem is Empty.");
         else
             this.count--;
     }

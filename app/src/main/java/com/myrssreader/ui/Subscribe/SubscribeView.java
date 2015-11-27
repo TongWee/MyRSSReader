@@ -9,7 +9,12 @@ import java.util.List;
  */
 public interface SubscribeView {
     void showRefresh();
+
     void hideRefresh();
+
     void loadMoreItems(List<FeedItem> feedItems);
+
     void refreshItems(List<FeedItem> feedItems);
+
+    void setBackEnable(boolean isEnable);
 }

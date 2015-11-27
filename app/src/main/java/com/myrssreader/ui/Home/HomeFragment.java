@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 import com.myrssreader.R;
@@ -19,7 +18,6 @@ import com.myrssreader.ui.BaseFragment;
 import com.myrssreader.ui.OnItemClickListener;
 import com.myrssreader.ui.OnTurntoSubscribeFragment;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,13 +39,14 @@ public class HomeFragment extends BaseFragment implements HomeView, OnItemClickL
     @Bind(R.id.home_fab)
     FloatingActionButton _HomeFab;
 
-    OnTurntoSubscribeFragment  onTurntoSubscribeFragment;
+    OnTurntoSubscribeFragment onTurntoSubscribeFragment;
+    MaterialDialog mMaterialDialog;
+    private HomeAdapter homeAdapter;
 
-    public void setOnTurntoSubscribeFragment(OnTurntoSubscribeFragment onTurntoSubscribeFragment){
+    public void setOnTurntoSubscribeFragment(OnTurntoSubscribeFragment onTurntoSubscribeFragment) {
         this.onTurntoSubscribeFragment = onTurntoSubscribeFragment;
     }
-    private HomeAdapter homeAdapter;
-    MaterialDialog mMaterialDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -110,7 +109,7 @@ public class HomeFragment extends BaseFragment implements HomeView, OnItemClickL
 
     @Override
     public void onItemClickListener(View view, int position, String viewName) {
-        if(viewName == "homeFragment") {
+        if (viewName == "homeFragment") {
             FeedRespose feedRespose = homeAdapter.getFeedList(position);
             onTurntoSubscribeFragment.onGetLink(feedRespose.getLink());
         }

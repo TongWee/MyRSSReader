@@ -5,8 +5,9 @@ import android.os.Parcelable;
 
 /**
  * Created by Tong on 2015/11/18.
+ * 每一篇文章对应的对象，在一个feedResponse中存储多个feedItem
  */
-public class FeedItem implements Parcelable{
+public class FeedItem implements Parcelable {
     private String title;
     private String category;
     private String description;
@@ -17,7 +18,7 @@ public class FeedItem implements Parcelable{
     private boolean isLoaded;
     private boolean isStared;
 
-    public FeedItem(){
+    public FeedItem() {
         isLoaded = false;
         isStared = false;
     }
@@ -106,7 +107,7 @@ public class FeedItem implements Parcelable{
         parcel.writeString(description);
     }
 
-    public static final Parcelable.Creator<FeedItem> CREATOR = new Parcelable.Creator<FeedItem>(){
+    public static final Parcelable.Creator<FeedItem> CREATOR = new Parcelable.Creator<FeedItem>() {
 
         @Override
         public FeedItem createFromParcel(Parcel parcel) {

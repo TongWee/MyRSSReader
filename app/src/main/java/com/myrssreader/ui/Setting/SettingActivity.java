@@ -3,8 +3,8 @@ package com.myrssreader.ui.Setting;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
-import com.myrssreader.ui.ActionBarActivity;
 import com.myrssreader.R;
+import com.myrssreader.ui.ActionBarActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

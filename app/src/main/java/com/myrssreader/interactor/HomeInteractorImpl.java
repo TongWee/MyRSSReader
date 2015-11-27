@@ -2,6 +2,7 @@ package com.myrssreader.interactor;
 
 import android.database.Cursor;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -17,6 +18,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import java.io.StringReader;
+import java.net.URL;
 import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
@@ -26,9 +28,18 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class HomeInteractorImpl implements HomeInteractor {
     private DataBaseHelper dataBaseHelper;
-    public HomeInteractorImpl(){
+
+    /**
+     * 初始化数据库及数据
+     */
+    public HomeInteractorImpl() {
         dataBaseHelper = RSSReaderApp.getDataBaseHelper();
     }
+
+    /**
+     * 加载已订阅订阅频道列表
+     * @param onGetSubscribeListCallBack 回调函数 返回feedResponse对象
+     */
     @Override
     public void loadSubscribeList(OnGetSubscribeListCallBack onGetSubscribeListCallBack) {
         List<FeedRespose> feedResposeList = dataBaseHelper.getAllSubscribe();
@@ -38,29 +49,47 @@ public class HomeInteractorImpl implements HomeInteractor {
             onGetSubscribeListCallBack.onSuccess(feedResposeList);
     }
 
+    /**
+     *
+     * @param urlString RSS源的URL地址
+     * @param onGetSubscribeListCallBack 回调函数 返回feedResponse对象
+     */
     @Override
-    public void addSubscribe(String urlString, final OnGetSubscribeListCallBack onGetSubscribeListCallBack) {
+    public void addSubscribe(final String urlString, final OnGetSubscribeListCallBack onGetSubscribeListCallBack) {
         RequestQueue requestQueue = Volley.newRequestQueue(RSSReaderApp.getContext());
-        StringRequest stringRequest = new StringRequest(urlString, new Response.Listener<String>() {
+        final String strLink;
+        if (!urlString.contains("http://"))
+            strLink = "http://" + urlString;
+        else
+            strLink = urlString;
+        StringRequest stringRequest = new StringRequest(strLink, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 FeedRespose feedRespose = parseXMLWithSAX(response);
-                if(feedRespose == null)
+                if (feedRespose == null)
                     onGetSubscribeListCallBack.onFailure("添加订阅失败");
-                else
+                else {
+                    feedRespose.setLink(strLink);
+                    dataBaseHelper.insertSubscribe(feedRespose);
                     onGetSubscribeListCallBack.onSuccessAdd(feedRespose);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                onGetSubscribeListCallBack.onFailure("添加订阅失败");
+                onGetSubscribeListCallBack.onFailure(error.toString());
             }
         }
         );
         requestQueue.add(stringRequest);
     }
 
-    private FeedRespose parseXMLWithSAX(String xmlData){
+    /**
+     *
+     * @param xmlData String流形式的xml数据
+     * @return 解析出的feedResponse对象
+     */
+    private FeedRespose parseXMLWithSAX(String xmlData) {
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             XMLReader xmlReader = factory.newSAXParser().getXMLReader();
@@ -69,10 +98,9 @@ public class HomeInteractorImpl implements HomeInteractor {
             xmlReader.parse(new InputSource(new StringReader(xmlData)));
             FeedRespose feedRespose = rssHandler.getRespose();
             return feedRespose;
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Log.d("XML", ex.getStackTrace().toString());
             return null;
         }
     }
-
 }

@@ -24,8 +24,8 @@ import butterknife.ButterKnife;
 public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<FeedItem> mDataset = new ArrayList<>();
     private Context context;
-
     private OnItemClickListener onItemClickListener;
+
     public SubscribeAdapter(Context context) {
         this.context = context;
     }
@@ -38,18 +38,18 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         return mViewHolder;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         FeedItem feedItem = mDataset.get(position);
-        ViewHolder viewHolder = (ViewHolder)holder;
+        ViewHolder viewHolder = (ViewHolder) holder;
 
-        if(feedItem.getDescription()!=null)
+        if (feedItem.getDescription() != null)
             viewHolder._ListFeedDescription.setText(Html.fromHtml(feedItem.getDescription()));
-        if(feedItem.getTitle()!=null)
+        if (feedItem.getTitle() != null)
             viewHolder._ListFeedTitle.setText(Html.fromHtml(feedItem.getTitle()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,34 +60,34 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
 
-
     @Override
     public int getItemCount() {
         int feedCount = mDataset.size();
         return feedCount;
     }
 
-    public void addItems(List<FeedItem> feedItems){
-        mDataset.addAll(getItemCount(),feedItems);
+    public void addItems(List<FeedItem> feedItems) {
+        mDataset.addAll(getItemCount(), feedItems);
         notifyDataSetChanged();
     }
 
-    public FeedItem getFeedItem(int position){
+    public FeedItem getFeedItem(int position) {
         return mDataset.get(position);
     }
 
-    public void refreshItems(List<FeedItem> feedItems){
+    public void refreshItems(List<FeedItem> feedItems) {
         mDataset.clear();
         mDataset.addAll(feedItems);
         notifyDataSetChanged();
     }
+
     /**
      * This class contains all butterknife-injected Views & Layouts from layout file 'list_home_item.xml'
      * for easy to all layout elements.
      *
      * @author ButterKnifeZelezny, plugin for Android Studio by Avast Developers (http://github.com/avast)
      */
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.list_feed_title)
         TextView _ListFeedTitle;
         @Bind(R.id.list_feed_description)

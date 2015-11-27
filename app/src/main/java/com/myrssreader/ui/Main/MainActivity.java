@@ -1,16 +1,15 @@
 package com.myrssreader.ui.Main;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 
@@ -34,16 +33,10 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainView,NavigationView.OnNavigationItemSelectedListener,OnTurntoSubscribeFragment{
+public class MainActivity extends BaseActivity implements MainView, NavigationView.OnNavigationItemSelectedListener, OnTurntoSubscribeFragment {
 
     @Inject
     MainPresenter mMainPresenter;
-
-    private HomeFragment homeFragment;
-    private StaredFragment staredFragment;
-    private SubscribeFragment subscribeFragment;
-    private String curFragment;
-
     @Bind(R.id.tool_Bar)
     Toolbar _ToolBar;
     @Bind(R.id.main_content)
@@ -52,6 +45,11 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
     NavigationView _NavigationView;
     @Bind(R.id.drawer_layout)
     DrawerLayout _DrawerLayout;
+    private HomeFragment homeFragment;
+    private StaredFragment staredFragment;
+    private SubscribeFragment subscribeFragment;
+    private String curFragment;
+    private boolean isBackEnable = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +63,12 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         mMainPresenter.initSubscribeData(this);
 
         ActionBarDrawerToggle adTogger = new ActionBarDrawerToggle(this,
-                _DrawerLayout,_ToolBar,R.string.navigation_drawer_open,
+                _DrawerLayout, _ToolBar, R.string.navigation_drawer_open,
                 R.string.navigation_drawer_close);
         _DrawerLayout.setDrawerListener(adTogger);
         adTogger.syncState();
 
         _NavigationView.setNavigationItemSelectedListener(this);
-
 
         homeFragment = new HomeFragment();
         homeFragment.setOnTurntoSubscribeFragment(this);
@@ -81,21 +78,22 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
     }
 
     @Override
-    public List<Object> getModules(){
+    public List<Object> getModules() {
         return Arrays.<Object>asList(new MainModule(this));
     }
 
     @Override
     public void onBackPressed() {
-        if(_DrawerLayout.isDrawerOpen(Gravity.LEFT))
-            _DrawerLayout.closeDrawer(Gravity.LEFT);
-        else if(curFragment.equals("SubscribeFragment")) {
-            curFragment = "HomeFragment";
-            _ToolBar.setTitle("主页");
-            getFragmentManager().beginTransaction().replace(R.id.main_container, homeFragment).commit();
+        if (isBackEnable) {
+            if (_DrawerLayout.isDrawerOpen(Gravity.LEFT))
+                _DrawerLayout.closeDrawer(Gravity.LEFT);
+            else if (curFragment.equals("SubscribeFragment")) {
+                curFragment = "HomeFragment";
+                _ToolBar.setTitle("主页");
+                getFragmentManager().beginTransaction().replace(R.id.main_container, homeFragment).commit();
+            } else
+                super.doExit();
         }
-        else
-            super.doExit();
     }
 
     @Override
@@ -103,9 +101,9 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = null;
         boolean isActivity = false;
-        switch (rId){
+        switch (rId) {
             case R.id.menu_item_main:
-                if(homeFragment == null) {
+                if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                 }
                 homeFragment.setOnTurntoSubscribeFragment(this);
@@ -114,14 +112,15 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
                 _ToolBar.setTitle(R.string.menu_home);
                 break;
             case R.id.menu_item_subscribe:
-                if(subscribeFragment == null)
+                if (subscribeFragment == null)
                     subscribeFragment = new SubscribeFragment();
+                subscribeFragment.setOnBackListener(this);
                 fragment = subscribeFragment;
                 curFragment = "Subscribe";
                 _ToolBar.setTitle(R.string.menu_subscribe);
                 break;
             case R.id.menu_item_star:
-                if(staredFragment == null)
+                if (staredFragment == null)
                     staredFragment = new StaredFragment();
                 fragment = staredFragment;
                 curFragment = "StaredFragment";
@@ -142,7 +141,7 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
             default:
                 return;
         }
-        if(!isActivity) {
+        if (!isActivity) {
             fragmentManager.beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.main_container, fragment).commit();
         }
         _DrawerLayout.closeDrawer(Gravity.LEFT);
@@ -159,11 +158,18 @@ public class MainActivity extends BaseActivity implements MainView,NavigationVie
     public void onGetLink(String link) {
         Bundle bundle = new Bundle();
         bundle.putString("Link", link);
-        if(subscribeFragment == null)
+        if (subscribeFragment == null)
             subscribeFragment = new SubscribeFragment();
         subscribeFragment.setArguments(bundle);
+        subscribeFragment.setOnBackListener(this);
         _ToolBar.setTitle("订阅");
         curFragment = "SubscribeFragment";
         getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.main_container, subscribeFragment).commit();
     }
+
+    @Override
+    public void setBackEnable(boolean isEnable) {
+        this.isBackEnable = isEnable;
+    }
+
 }
