@@ -34,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 依赖倒置：
+     * 依赖反转：
      * 由调用者（不同的Activity）通过实现抽象方法getModules()，传入各自对应的对象图表
      * 构造指定域对象图表
      *

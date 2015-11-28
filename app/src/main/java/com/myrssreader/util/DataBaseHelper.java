@@ -38,6 +38,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         mContext = context;
     }
 
+    /**
+     * 如果数据库不存在，调用
+     * @param sqLiteDatabase
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         try {
@@ -49,6 +53,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * 如果数据库已存在，需要更新时，调用
+     * @param sqLiteDatabase
+     * @param i
+     * @param i1
+     */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("drop table if exists Subscribe");
@@ -56,6 +66,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    /**
+     * 表是否为空
+     * @param tableString 表名
+     * @return 为空则返回true
+     */
     public boolean isEmpty(String tableString) {
         String DATA_COUNT = "select * from " + tableString;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -70,6 +85,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * 按title查找订阅频道 或 文章
+     * @param table 表名
+     * @param title 标题名
+     * @return 如果表中包含，返回true
+     */
     public boolean hasItem(String table, String title) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(table, null, "title = ?", new String[]{title}, null, null, null);
@@ -82,6 +103,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * 添加订阅频道
+     * @param feedRespose
+     */
     public void insertSubscribe(FeedRespose feedRespose) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -91,6 +116,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert("Subscribe", null, contentValues);
     }
 
+    /**
+     * 添加收藏文章
+     * @param feedItem
+     */
     public void insertStared(FeedItem feedItem) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -100,11 +129,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.insert("Stared", null, contentValues);
     }
 
+    /**
+     * 删除频道 或 收藏文章
+     * @param table
+     * @param title
+     */
     public void delete(String table, String title) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.delete(table, "title = ?", new String[]{title});
     }
 
+    /**
+     * 获取所有订阅频道信息
+     * @return 订阅频道列表
+     */
     public List<FeedRespose> getAllSubscribe() {
         String DATA_COUNT = "select * from Subscribe";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
@@ -122,6 +160,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return feedResposeList;
     }
 
+    /**
+     * 获取所有收藏文章
+     * @return 收藏文章列表
+     */
     public List<FeedItem> getAllStared() {
         List<FeedItem> feedItemList = new ArrayList<>();
         String DATA_COUNT = "select * from Stared";

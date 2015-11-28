@@ -96,6 +96,10 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
         }
     }
 
+    /**
+     * fragment & activity 跳转
+     * @param rId
+     */
     @Override
     public void changeFragment(int rId) {
         FragmentManager fragmentManager = getFragmentManager();

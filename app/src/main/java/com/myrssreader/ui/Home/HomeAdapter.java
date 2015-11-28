@@ -29,6 +29,10 @@ public class HomeAdapter extends RecyclerView.Adapter {
         this.context = context;
     }
 
+    /**
+     * 响应订阅频道点击操作
+     * @param onItemClickListener 回调函数
+     */
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -45,6 +49,11 @@ public class HomeAdapter extends RecyclerView.Adapter {
         return mData.get(position);
     }
 
+    /**
+     * 数据与UI绑定
+     * @param holder viewHolder
+     * @param position 位置
+     */
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 

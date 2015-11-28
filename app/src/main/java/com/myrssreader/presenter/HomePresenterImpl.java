@@ -23,26 +23,45 @@ public class HomePresenterImpl implements HomePresenter, OnGetSubscribeListCallB
         this.homeInteractor = _homeInteractor;
     }
 
+    /**
+     * 添加订阅
+     * @param urlString RSS源URL地址
+     */
     @Override
     public void addSubscribe(String urlString) {
         homeInteractor.addSubscribe(urlString, this);
     }
 
+    /**
+     * 第一次加载订阅频道列表
+     */
     @Override
     public void firstLoadSubscribeList() {
         homeInteractor.loadSubscribeList(this);
     }
 
+    /**
+     * 回调函数获取订阅列表
+     * @param feedResposeList 回调函数参数
+     */
     @Override
     public void onSuccess(List<FeedRespose> feedResposeList) {
         homeView.firstLoadSubscribe(feedResposeList);
     }
 
+    /**
+     * 回调函数添加订阅
+     * @param feedRespose 回调函数参数
+     */
     @Override
     public void onSuccessAdd(FeedRespose feedRespose) {
         homeView.addSubscribe(feedRespose);
     }
 
+    /**
+     * 回调函数订阅失败
+     * @param errorString 错误信息
+     */
     @Override
     public void onFailure(String errorString) {
         Toast.makeText(RSSReaderApp.getContext(), errorString, Toast.LENGTH_SHORT).show();

@@ -28,6 +28,10 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
         this.subscribeInteractor = _subscribeInteractor;
     }
 
+    /**
+     * 将获取的文章列表加载交给view层加载到UI上
+     * @param feedItemList 文章列表
+     */
     @Override
     public void onSuccess(List<FeedItem> feedItemList) {
         if (isLoadingMore) {
@@ -47,13 +51,20 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
         subscribeView.hideRefresh();
     }
 
+    /**
+     * Toast显示错误信息
+     * @param ex 错误信息
+     */
     @Override
     public void onFailure(String ex) {
         Toast.makeText(RSSReaderApp.getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
         subscribeView.hideRefresh();
     }
 
-
+    /**
+     * 第一次加载文章列表
+     * @param _link RSS源URL地址
+     */
     @Override
     public void firstTimeRefreshHomeItems(String _link) {
         subscribeView.setBackEnable(false);
@@ -63,6 +74,9 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
         subscribeInteractor.getFeedListPage(link,this);
     }
 
+    /**
+     * 刷新文章列表
+     */
     @Override
     public void refreshHomeItems() {
         subscribeView.setBackEnable(false);
@@ -73,6 +87,10 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
         subscribeInteractor.getFeedListPage(link,this);
     }
 
+    /**
+     * 加载更多
+     * (暂未添加该功能)
+     */
     @Override
     public void loadMoreHomeItems() {
         refreshHomeItems();
