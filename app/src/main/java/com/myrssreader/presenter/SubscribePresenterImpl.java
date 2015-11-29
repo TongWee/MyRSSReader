@@ -59,6 +59,7 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
     public void onFailure(String ex) {
         Toast.makeText(RSSReaderApp.getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
         subscribeView.hideRefresh();
+        subscribeView.setBackEnable(true);
     }
 
     /**

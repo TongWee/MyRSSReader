@@ -65,8 +65,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
         else
             viewHolder._TvMainListTitle.setText(feedRespose.getTitle());
 
-        if (feedRespose.getDescription() == null)
-            viewHolder._TvMainListDescription.setText(" ");
+        if (feedRespose.getDescription() == null || feedRespose.getDescription().length() < 10)
+            viewHolder._TvMainListDescription.setVisibility(View.GONE);
         else
             viewHolder._TvMainListDescription.setText(feedRespose.getDescription());
 

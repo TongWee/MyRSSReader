@@ -39,11 +39,10 @@ public class SubscribeInteractorImpl implements SubscribeInteractor {
             @Override
             public void onResponse(String response) {
                 FeedRespose feedRespose = parseXMLWithSAX(response);
-                List<FeedItem> feedItems = feedRespose.getFeedList();
-                if (feedItems == null)
-                    onGetFeedListCallBack.onFailure("Failed");
+                if(feedRespose == null)
+                    onGetFeedListCallBack.onFailure("加载文章列表失败");
                 else
-                    onGetFeedListCallBack.onSuccess(feedItems);
+                    onGetFeedListCallBack.onSuccess(feedRespose.getFeedList());
             }
         }, new Response.ErrorListener() {
             @Override

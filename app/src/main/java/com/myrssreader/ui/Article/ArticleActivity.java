@@ -48,7 +48,10 @@ public class ArticleActivity extends ActionBarActivity implements ArticleView {
 
         if (feedItem != null) {
             _TvArticle.setText(feedItem.getTitle());
-            _TvDescription.setText(Html.fromHtml(feedItem.getDescription()));
+            if(feedItem.getDescription().length() < 10)
+                _TvDescription.setVisibility(View.GONE);
+            else
+                _TvDescription.setText(Html.fromHtml(feedItem.getDescription()));
             intent.putExtra("link", feedItem.getLink());
         }
 

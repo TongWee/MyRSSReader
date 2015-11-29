@@ -47,7 +47,9 @@ public class SubscribeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         FeedItem feedItem = mDataset.get(position);
         ViewHolder viewHolder = (ViewHolder) holder;
 
-        if (feedItem.getDescription() != null)
+        if (feedItem.getDescription() == null || feedItem.getDescription().length() < 10)
+            viewHolder._ListFeedDescription.setVisibility(View.GONE);
+        else
             viewHolder._ListFeedDescription.setText(Html.fromHtml(feedItem.getDescription()));
         if (feedItem.getTitle() != null)
             viewHolder._ListFeedTitle.setText(Html.fromHtml(feedItem.getTitle()));

@@ -51,24 +51,23 @@ public class MainInteractorImpl implements MainInteractor {
             contentValues.put("description", "科学就是力量");
             sqLiteDatabase.insert("Subscribe", null, contentValues);
             contentValues.clear();
-
-            contentValues.put("title", "PanSci 泛科學");
-            contentValues.put("link", "http://pansci.asia/feed");
-            contentValues.put("description", "全台最大科學知識社群");
-            sqLiteDatabase.insert("Subscribe", null, contentValues);
-            contentValues.clear();
+//
+//            contentValues.put("title", "PanSci 泛科學");
+//            contentValues.put("link", "http://pansci.asia/feed");
+//            contentValues.put("description", "全台最大科學知識社群");
+//            sqLiteDatabase.insert("Subscribe", null, contentValues);
+//            contentValues.clear();
 
             contentValues.put("title", "Matrix67");
             contentValues.put("link", "http://www.matrix67.com/blog/feed");
-            contentValues.put("description", " ");
             sqLiteDatabase.insert("Subscribe", null, contentValues);
             contentValues.clear();
 
-            contentValues.put("title", "网易新闻");
-            contentValues.put("link", "http://news.163.com/special/00011K6L/rss_newsattitude.xml");
-            contentValues.put("description", "网易新闻·有态度专栏");
-            sqLiteDatabase.insert("Subscribe", null, contentValues);
-            contentValues.clear();
+//            contentValues.put("title", "网易新闻");
+//            contentValues.put("link", "http://news.163.com/special/00011K6L/rss_newsattitude.xml");
+//            contentValues.put("description", "网易新闻·有态度专栏");
+//            sqLiteDatabase.insert("Subscribe", null, contentValues);
+//            contentValues.clear();
 
             contentValues.put("title", "Engadget");
             contentValues.put("link", "http://cn.engadget.com/rss.xml");
@@ -76,9 +75,15 @@ public class MainInteractorImpl implements MainInteractor {
             sqLiteDatabase.insert("Subscribe", null, contentValues);
             contentValues.clear();
 
-            contentValues.put("title", "科学网博客RSS");
-            contentValues.put("link", "http://fullrss.net/a/http/www.sciencenet.cn/xml/blog.aspx?di=20");
-            contentValues.put("description", "科学网是由科学院、工程院和基金委主管，中国科学报社主办的公益性网站，提供新闻、博客、论坛、免费信息发布、资料互助等服务");
+//            contentValues.put("title", "科学网博客RSS");
+//            contentValues.put("link", "http://fullrss.net/a/http/www.sciencenet.cn/xml/blog.aspx?di=20");
+//            contentValues.put("description", "科学网是由科学院、工程院和基金委主管，中国科学报社主办的公益性网站，提供新闻、博客、论坛、免费信息发布、资料互助等服务");
+//            sqLiteDatabase.insert("Subscribe", null, contentValues);
+//            contentValues.clear();
+
+            contentValues.put("title", "理想生活实验室");
+            contentValues.put("link", "http://www.toodaylab.com/feed");
+            contentValues.put("description", "关注创意设计与生活消费");
             sqLiteDatabase.insert("Subscribe", null, contentValues);
             contentValues.clear();
 

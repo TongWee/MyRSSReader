@@ -20,13 +20,15 @@ public class RSSHandler extends DefaultHandler {
     private final int RSS_PUBDATE = 8;
     private final int RSS_DESCRIPTION = 9;
     private final int RSS_LINK = 10;
-    int currentState = 0;
+    private int currentState = 0;
     private FeedItem feedItem;
     private FeedRespose feedRespose;
     private String lastElementName = "";
     private boolean isFeedTitle = true;
     private boolean isFeedDescription = true;
     private boolean isFeedLink = true;
+
+    private StringBuffer descriptionStr = null;
 
     public FeedRespose getRespose() {
         return feedRespose;
@@ -92,6 +94,9 @@ public class RSSHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String contentString = new String(ch, start, length);
+        //contentString = contentString.trim();
+        if(contentString.equals("\n") || contentString.equals("\t"))
+            return;
         switch (currentState) {
             case RSS_FEED_TITLE:
                 feedRespose.setTitle(contentString);
@@ -123,20 +128,19 @@ public class RSSHandler extends DefaultHandler {
                 break;
             case RSS_DESCRIPTION:
                 currentState = 0;
-                feedItem.setDescription(contentString);
+                descriptionStr.append(contentString);
+//                feedItem.setDescription(contentString);
                 break;
             default:
                 currentState = 0;
-                return;
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-//        super.endElement(uri, localName, qName);
         if (localName.equals("item")) {
+            feedItem.setDescription(descriptionStr.toString().trim());
             feedRespose.addFeed(feedItem);
-            return;
         }
     }
 
