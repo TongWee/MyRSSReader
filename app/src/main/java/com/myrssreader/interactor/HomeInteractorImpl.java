@@ -1,8 +1,6 @@
 package com.myrssreader.interactor;
 
-import android.database.Cursor;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,7 +16,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import java.io.StringReader;
-import java.net.URL;
 import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
@@ -38,6 +35,7 @@ public class HomeInteractorImpl implements HomeInteractor {
 
     /**
      * 加载已订阅订阅频道列表
+     *
      * @param onGetSubscribeListCallBack 回调函数 返回feedResponse对象
      */
     @Override
@@ -50,8 +48,7 @@ public class HomeInteractorImpl implements HomeInteractor {
     }
 
     /**
-     *
-     * @param urlString RSS源的URL地址
+     * @param urlString                  RSS源的URL地址
      * @param onGetSubscribeListCallBack 回调函数 返回feedResponse对象
      */
     @Override
@@ -85,7 +82,6 @@ public class HomeInteractorImpl implements HomeInteractor {
     }
 
     /**
-     *
      * @param xmlData String流形式的xml数据
      * @return 解析出的feedResponse对象
      */

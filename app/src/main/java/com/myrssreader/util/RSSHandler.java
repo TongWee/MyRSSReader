@@ -28,7 +28,7 @@ public class RSSHandler extends DefaultHandler {
     private boolean isFeedDescription = true;
     private boolean isFeedLink = true;
 
-    private StringBuffer descriptionStr = null;
+    private StringBuffer descriptionStr = new StringBuffer();
 
     public FeedRespose getRespose() {
         return feedRespose;
@@ -94,8 +94,8 @@ public class RSSHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String contentString = new String(ch, start, length);
-        //contentString = contentString.trim();
-        if(contentString.equals("\n") || contentString.equals("\t"))
+        contentString = contentString.trim();
+        if (contentString.equals("\n") || contentString.equals("\t") || contentString.equals(""))
             return;
         switch (currentState) {
             case RSS_FEED_TITLE:
@@ -129,6 +129,7 @@ public class RSSHandler extends DefaultHandler {
             case RSS_DESCRIPTION:
                 currentState = 0;
                 descriptionStr.append(contentString);
+                //feedItem.setDescription(descriptionStr.toString().trim());
 //                feedItem.setDescription(contentString);
                 break;
             default:
@@ -141,6 +142,7 @@ public class RSSHandler extends DefaultHandler {
         if (localName.equals("item")) {
             feedItem.setDescription(descriptionStr.toString().trim());
             feedRespose.addFeed(feedItem);
+            descriptionStr.delete(0, descriptionStr.length());
         }
     }
 

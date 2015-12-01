@@ -30,6 +30,7 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
 
     /**
      * 将获取的文章列表加载交给view层加载到UI上
+     *
      * @param feedItemList 文章列表
      */
     @Override
@@ -53,6 +54,7 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
 
     /**
      * Toast显示错误信息
+     *
      * @param ex 错误信息
      */
     @Override
@@ -64,6 +66,7 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
 
     /**
      * 第一次加载文章列表
+     *
      * @param _link RSS源URL地址
      */
     @Override
@@ -72,7 +75,7 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
         subscribeView.showRefresh();
         if (_link != null)
             this.link = _link;
-        subscribeInteractor.getFeedListPage(link,this);
+        subscribeInteractor.getFeedListPage(link, this);
     }
 
     /**
@@ -85,7 +88,7 @@ public class SubscribePresenterImpl implements SubscribePresenter, OnGetFeedList
             return;
         isResfreshing = true;
         subscribeView.showRefresh();
-        subscribeInteractor.getFeedListPage(link,this);
+        subscribeInteractor.getFeedListPage(link, this);
     }
 
     /**

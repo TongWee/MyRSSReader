@@ -65,7 +65,6 @@ public class HomeFragment extends BaseFragment implements HomeView, OnItemClickL
         _HomeFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(), "Click Fab", Toast.LENGTH_SHORT).show();
                 mMaterialDialog.show();
             }
         });
@@ -109,9 +108,9 @@ public class HomeFragment extends BaseFragment implements HomeView, OnItemClickL
 
     @Override
     public void onItemClickListener(View view, int position, String viewName) {
-        if (viewName == "homeFragment") {
+        if (viewName.equals("homeFragment")) {
             FeedRespose feedRespose = homeAdapter.getFeedList(position);
-            onTurntoSubscribeFragment.onGetLink(feedRespose.getLink());
+            onTurntoSubscribeFragment.onGetFeed(feedRespose.getTitle(), feedRespose.getLink());
         }
     }
 

@@ -31,6 +31,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     /**
      * 响应订阅频道点击操作
+     *
      * @param onItemClickListener 回调函数
      */
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -51,7 +52,8 @@ public class HomeAdapter extends RecyclerView.Adapter {
 
     /**
      * 数据与UI绑定
-     * @param holder viewHolder
+     *
+     * @param holder   viewHolder
      * @param position 位置
      */
     @Override
@@ -65,7 +67,7 @@ public class HomeAdapter extends RecyclerView.Adapter {
         else
             viewHolder._TvMainListTitle.setText(feedRespose.getTitle());
 
-        if (feedRespose.getDescription() == null || feedRespose.getDescription().length() < 10)
+        if (feedRespose.getDescription() == null || feedRespose.getDescription().equals(""))
             viewHolder._TvMainListDescription.setVisibility(View.GONE);
         else
             viewHolder._TvMainListDescription.setText(feedRespose.getDescription());

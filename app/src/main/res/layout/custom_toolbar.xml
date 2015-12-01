@@ -10,7 +10,7 @@
         android:id="@+id/tool_Bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="@color/primary"
         app:layout_collapseMode="pin"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>

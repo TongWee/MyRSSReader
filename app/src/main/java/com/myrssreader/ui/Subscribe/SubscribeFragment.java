@@ -42,6 +42,8 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
     private LinearLayoutManager linearLayoutManager;
     private boolean isFirstLoad = true;
     private OnTurntoSubscribeFragment onTurntoSubscribeFragment;
+    private String curChannel = "廖雪峰的博客";
+    private String link;
 
     public void setOnBackListener(OnTurntoSubscribeFragment onTurntoSubscribeFragment) {
         this.onTurntoSubscribeFragment = onTurntoSubscribeFragment;
@@ -51,9 +53,9 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         Bundle bundle = getArguments();
-        String link = null;
         if (bundle != null) {
             link = bundle.getString("Link");
+            curChannel = bundle.getString("Title");
         }
 
         View rootView = inflater.inflate(R.layout.fragment_subscribe, container, false);
@@ -126,6 +128,7 @@ public class SubscribeFragment extends BaseFragment implements SubscribeView, Sw
 
             Intent intent = new Intent(getActivity(), ArticleActivity.class);
             intent.putExtra("feedItem", feedItem);
+            intent.putExtra("feedResponse", curChannel);
             startActivity(intent);
         }
     }

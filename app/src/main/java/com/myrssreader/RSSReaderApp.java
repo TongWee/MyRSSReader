@@ -15,11 +15,20 @@ import dagger.ObjectGraph;
  */
 public class RSSReaderApp extends Application {
 
+    private static DataBaseHelper dataBaseHelper;
+    private static Context context;
     ObjectGraph objectGraph;
 
-    private static DataBaseHelper dataBaseHelper;
+    /**
+     * @return Context
+     */
+    public static Context getContext() {
+        return context;
+    }
 
-    private static Context context;
+    public static DataBaseHelper getDataBaseHelper() {
+        return dataBaseHelper;
+    }
 
     @Override
     public void onCreate() {
@@ -43,13 +52,6 @@ public class RSSReaderApp extends Application {
     }
 
     /**
-     * @return Context
-     */
-    public static Context getContext() {
-        return context;
-    }
-
-    /**
      * 建立指定域对象图表，用于不同的Activity
      *
      * @param modules
@@ -57,9 +59,5 @@ public class RSSReaderApp extends Application {
      */
     public ObjectGraph createScopedGraph(Object... modules) {
         return objectGraph.plus(modules);
-    }
-
-    public static DataBaseHelper getDataBaseHelper() {
-        return dataBaseHelper;
     }
 }

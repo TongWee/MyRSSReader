@@ -13,6 +13,22 @@ public class FeedItem implements Parcelable {
     private String description;
     private String pubDate;
     private String link;
+    public static final Parcelable.Creator<FeedItem> CREATOR = new Parcelable.Creator<FeedItem>() {
+
+        @Override
+        public FeedItem createFromParcel(Parcel parcel) {
+            FeedItem feedItem = new FeedItem();
+            feedItem.title = parcel.readString();
+            feedItem.link = parcel.readString();
+            feedItem.description = parcel.readString();
+            return feedItem;
+        }
+
+        @Override
+        public FeedItem[] newArray(int i) {
+            return new FeedItem[i];
+        }
+    };
     private String source;
     private String author;
     private boolean isLoaded;
@@ -106,21 +122,4 @@ public class FeedItem implements Parcelable {
         parcel.writeString(link);
         parcel.writeString(description);
     }
-
-    public static final Parcelable.Creator<FeedItem> CREATOR = new Parcelable.Creator<FeedItem>() {
-
-        @Override
-        public FeedItem createFromParcel(Parcel parcel) {
-            FeedItem feedItem = new FeedItem();
-            feedItem.title = parcel.readString();
-            feedItem.link = parcel.readString();
-            feedItem.description = parcel.readString();
-            return feedItem;
-        }
-
-        @Override
-        public FeedItem[] newArray(int i) {
-            return new FeedItem[i];
-        }
-    };
 }

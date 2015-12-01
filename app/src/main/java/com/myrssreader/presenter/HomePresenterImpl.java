@@ -25,6 +25,7 @@ public class HomePresenterImpl implements HomePresenter, OnGetSubscribeListCallB
 
     /**
      * 添加订阅
+     *
      * @param urlString RSS源URL地址
      */
     @Override
@@ -42,6 +43,7 @@ public class HomePresenterImpl implements HomePresenter, OnGetSubscribeListCallB
 
     /**
      * 回调函数获取订阅列表
+     *
      * @param feedResposeList 回调函数参数
      */
     @Override
@@ -51,6 +53,7 @@ public class HomePresenterImpl implements HomePresenter, OnGetSubscribeListCallB
 
     /**
      * 回调函数添加订阅
+     *
      * @param feedRespose 回调函数参数
      */
     @Override
@@ -60,6 +63,7 @@ public class HomePresenterImpl implements HomePresenter, OnGetSubscribeListCallB
 
     /**
      * 回调函数订阅失败
+     *
      * @param errorString 错误信息
      */
     @Override

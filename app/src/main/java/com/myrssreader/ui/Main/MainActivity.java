@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
 
     /**
      * fragment & activity 跳转
+     *
      * @param rId
      */
     @Override
@@ -159,16 +160,19 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
     }
 
     @Override
-    public void onGetLink(String link) {
+    public void onGetFeed(String title, String link) {
         Bundle bundle = new Bundle();
         bundle.putString("Link", link);
+        bundle.putString("Title", title);
         if (subscribeFragment == null)
             subscribeFragment = new SubscribeFragment();
         subscribeFragment.setArguments(bundle);
         subscribeFragment.setOnBackListener(this);
-        _ToolBar.setTitle("订阅");
+        _ToolBar.setTitle(title);
+
         curFragment = "SubscribeFragment";
         getFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.main_container, subscribeFragment).commit();
+
     }
 
     @Override

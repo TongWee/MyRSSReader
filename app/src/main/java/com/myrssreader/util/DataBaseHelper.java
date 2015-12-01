@@ -40,6 +40,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 如果数据库不存在，调用
+     *
      * @param sqLiteDatabase
      */
     @Override
@@ -55,6 +56,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 如果数据库已存在，需要更新时，调用
+     *
      * @param sqLiteDatabase
      * @param i
      * @param i1
@@ -68,6 +70,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 表是否为空
+     *
      * @param tableString 表名
      * @return 为空则返回true
      */
@@ -87,6 +90,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 按title查找订阅频道 或 文章
+     *
      * @param table 表名
      * @param title 标题名
      * @return 如果表中包含，返回true
@@ -105,6 +109,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 添加订阅频道
+     *
      * @param feedRespose
      */
     public void insertSubscribe(FeedRespose feedRespose) {
@@ -118,6 +123,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 添加收藏文章
+     *
      * @param feedItem
      */
     public void insertStared(FeedItem feedItem) {
@@ -131,6 +137,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 删除频道 或 收藏文章
+     *
      * @param table
      * @param title
      */
@@ -141,6 +148,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 获取所有订阅频道信息
+     *
      * @return 订阅频道列表
      */
     public List<FeedRespose> getAllSubscribe() {
@@ -162,6 +170,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     /**
      * 获取所有收藏文章
+     *
      * @return 收藏文章列表
      */
     public List<FeedItem> getAllStared() {

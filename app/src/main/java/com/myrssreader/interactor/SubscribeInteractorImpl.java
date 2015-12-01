@@ -8,7 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.myrssreader.RSSReaderApp;
-import com.myrssreader.bean.FeedItem;
 import com.myrssreader.bean.FeedRespose;
 import com.myrssreader.util.RSSHandler;
 
@@ -16,7 +15,6 @@ import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import java.io.StringReader;
-import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
 
@@ -26,11 +24,12 @@ import javax.xml.parsers.SAXParserFactory;
 public class SubscribeInteractorImpl implements SubscribeInteractor {
     /**
      * 获取FeedItem列表
-     * @param urlString URL地址
+     *
+     * @param urlString             URL地址
      * @param onGetFeedListCallBack 回调函数 获取得到的数据
      */
     @Override
-    public void getFeedListPage(final String urlString,final OnGetFeedListCallBack onGetFeedListCallBack) {
+    public void getFeedListPage(final String urlString, final OnGetFeedListCallBack onGetFeedListCallBack) {
         RequestQueue requestQueue = Volley.newRequestQueue(RSSReaderApp.getContext());
         String strLink = urlString;
         if (!urlString.contains("http://"))
@@ -39,7 +38,7 @@ public class SubscribeInteractorImpl implements SubscribeInteractor {
             @Override
             public void onResponse(String response) {
                 FeedRespose feedRespose = parseXMLWithSAX(response);
-                if(feedRespose == null)
+                if (feedRespose == null)
                     onGetFeedListCallBack.onFailure("加载文章列表失败");
                 else
                     onGetFeedListCallBack.onSuccess(feedRespose.getFeedList());
@@ -55,7 +54,6 @@ public class SubscribeInteractorImpl implements SubscribeInteractor {
     }
 
     /**
-     *
      * @param xmlData String流形式的xml数据
      * @return feedResponse对象
      */
